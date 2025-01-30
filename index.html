@@ -1,4 +1,4 @@
-<!doctype html>
+<!Doctype html>
 <html lang="es">
 <meta charset="utf-8" />
 <head>
@@ -47,6 +47,9 @@
 	width: 100%;
 	margin: 0px;
 	}
+	dialog {
+		overflow: auto;
+	}
 	.marcomapa {
 		height: 90%;
 		width: 100%;
@@ -58,7 +61,17 @@
 		background: #b4ff99;
 		color: #333;
 		font-size: 30px;
-		height: 10%;
+		height: 5%;
+		width: 100%;
+    }
+	.subtitulo {
+		align-items: right;
+		display: flex;
+		justify-content: right;
+		background: #b4ff99;
+		color: #333;
+		font-size: 30px;
+		height: 5%;
 		width: 100%;
     }
 	.formatopopuprojo {
@@ -98,8 +111,22 @@
 			<button id="btn-cerrar-modal-inicial" style="height:30px; width:90px; background-color:red;border-color:white;color:white">Ok. Cerrar</button>
 		</div>
 	</dialog>
+	<!--Modal para brindar detalles sobre el mapa-->
+	<dialog id="modal_informativo" style="text-align: center; background-color:yellow">
+		<div id="Informacion" style="font-family: Verdana, Geneva, Tahoma, Arial, sans-serif">Este mapa muestra algunas de las herrramientas más usuales para trabajar en visores web.<br>Por ejemplo, podés cambiar el estilo de mapa de fondo, modificar el zoom o escala, llevarlo a pantalla completa,<br>
+		medir un área y périmetro de tu interés, mostrar, ocultar posiciones marcadas previamente y filtrarlas mostrando sólo las que indiqués,<br>copiar al portapapeles las coordenadas de un punto de tu interés, trazar la ruta óptima entre dos lugares que señales y mostrar sus detalles y activar la ubicación en tiempo real.<br>
+		En la parte inferior de la pantalla te muestra la escala y un minimapa de situación relativa a nivel mundial.<br><br>
+		Combina lenguajes de marcación, estilo y programación: HTML, CSS y Javascript respectivamente.-</div>
+		<div style="text-align: right">
+			<button id="btn-cerrar-modal-informacion" style="height:30px; width:90px; background-color:red;border-color:white;color:white">Ok. Cerrar</button>
+		</div>
+	</dialog>
+	
 	<!--Este sería el contenedor del título en el cuerpo de la página-->
 	<div class="titulo" id="titulo">MAPA WEB BASICO CON SUS HERRAMIENTAS MAS USUALES</div>
+	<div class="subtitulo">
+		<img src="Imagenes/Informacion.jpg" height="50px" title="Más información" onClick="MasInformacion()"/>
+	</div>
 	<!--Este sería el contenedor del mapa-->
 	<div class="marcomapa" id="marcomapa"></div>
 	
@@ -235,7 +262,7 @@
 		var botonmodal=L.easyButton({position:'topright',
 			states: [{
 			stateName: 'add-modal',
-			icon:  '<span class="mostrarmarcadores"><img src="Imagenes/Modal.jpg" width="40" height="40"></span>',
+			icon:  '<span class="mostrarmarcadores"><img src="Imagenes/Modal.jpg" width="50" height="50"></span>',
 			title: 'Mostrar Modal',
 			onClick: function(boton1) {
 			valormodal=valormodal+1,
@@ -246,7 +273,7 @@
 			}
 			}, {
 			stateName: 'add-popup',
-			icon: '<span class="mostrarmarcadores"><img src="Imagenes/Modal.jpg" width="17" height="17"></span>',
+			icon: '<span class="mostrarmarcadores"><img src="Imagenes/Modal.jpg" width="50" height="50"></span>',
 			title: 'Mostrar Modal',
 			onClick: function(boton1) {
 			valormodal=valormodal+1,
@@ -382,7 +409,11 @@
 				afterDeviceMove: (event) => {
             }
         }).addTo(mapa);
-		console.log(controllocacion);
+		
+		<!--Función para mostrar Modal de Información-->
+		function MasInformacion(){
+			document.getElementById("modal_informativo").showModal();
+		};
 
 		<!--Creo tres marcadores usando la clase, pero dándole distrintos atributos y formatos-->
 		function crearmarcadores() {
@@ -457,9 +488,15 @@
 		};
 
 		crearmarcadores();
+		<!--Controlar el Modal Inicial-->
 		const btncerrarmodalinicial=document.querySelector("#btn-cerrar-modal-inicial");
 		const modalinicial=document.querySelector("#modal_inicial");
 		btncerrarmodalinicial.addEventListener("click",()=>{modalinicial.close();});
+		
+		<!--Controlar el Modal Información-->
+		const btncerrarmodalinformativo=document.querySelector("#btn-cerrar-modal-informacion");
+		const modalinformacion=document.querySelector("#modal_informativo");
+		btncerrarmodalinformativo.addEventListener("click",()=>{modalinformacion.close();});
 	</script>
 </body> 
 </html>
