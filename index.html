@@ -56,7 +56,6 @@
 		display: flex;
 		justify-content: center;
 		background: #b4ff99;
-		<!--background-color: blue;-->
 		color: #333;
 		font-size: 30px;
 		height: 10%;
@@ -162,7 +161,7 @@
 			fullscreenControlOptions: {
 				position: 'topright',
 				title: 'Mostrar en pantalla completa',
-				titleCancel: 'Salir de pantalla completa'
+				titleCancel: 'Salir de pantalla completa',
 			}
 		});
 
@@ -228,13 +227,15 @@
 			title: 'Añadir Marcadores'
 			}]
 			});
+		toggle.button.style.width = '50px';
+		toggle.button.style.height = '50px';
 		toggle.addTo(mapa);
 
 		<!--Creo un botón flotante dentro del mapa y lo personalizo para que alterne mostrando y ocultando el modal-->
 		var botonmodal=L.easyButton({position:'topright',
 			states: [{
 			stateName: 'add-modal',
-			icon:  '<span class="mostrarmarcadores"><img src="Imagenes/Modal.jpg" width="17" height="17"></span>',
+			icon:  '<span class="mostrarmarcadores"><img src="Imagenes/Modal.jpg" width="40" height="40"></span>',
 			title: 'Mostrar Modal',
 			onClick: function(boton1) {
 			valormodal=valormodal+1,
@@ -256,6 +257,8 @@
 			},
 			}]
 			});
+		botonmodal.button.style.width = '50px';
+		botonmodal.button.style.height = '50px';
 		botonmodal.addTo(mapa);
 
 		<!--Añado botón para capturar las coordenadas -->
@@ -304,6 +307,8 @@
 			},
 			}]
 			});
+		botoncoordenadas.button.style.width = '50px';
+		botoncoordenadas.button.style.height = '50px';
 		botoncoordenadas.addTo(mapa);
 
 		var IconoTaxi = L.icon({
@@ -343,6 +348,8 @@
 			});};
 		});
 		botonruta.setPosition('topright');
+		botonruta.button.style.width = '50px';
+		botonruta.button.style.height = '50px';
 		botonruta.addTo(mapa);
 		
 		<!--Añado del control de geolocalización-->
@@ -375,6 +382,7 @@
 				afterDeviceMove: (event) => {
             }
         }).addTo(mapa);
+		console.log(controllocacion);
 
 		<!--Creo tres marcadores usando la clase, pero dándole distrintos atributos y formatos-->
 		function crearmarcadores() {
